@@ -13,14 +13,14 @@ class BlogPost(models.Model):
 
     def copy(self):
         blog = BlogPost.objects.get(pk=self.pk)
-        blog.id = None
         blog.date_created = timezone.now()
+        blog.pk = None
         blog.save()
 
-        comments = self.commet_set.all()
+        comments = blog.comment_set.all()
         for comment in comments:
-            comment.id = None
             comment.blog_post = blog
+            comment.pk = None
             comment.save()
 
         return blog.id

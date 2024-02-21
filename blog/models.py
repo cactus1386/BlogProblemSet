@@ -17,7 +17,7 @@ class BlogPost(models.Model):
         blog.pk = None
         blog.save()
 
-        comments = blog.comment_set.all()
+        comments = self.comment_sets.all()
         for comment in comments:
             comment.blog_post = blog
             comment.pk = None
